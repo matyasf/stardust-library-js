@@ -4,10 +4,9 @@
 export default abstract class StardustElement
 {
     private static elementCounter = new Map<string, number>();
-    public name: string;
+    name: string;
 
-    protected constructor()
-    {
+    protected constructor() {
         const str = this.constructor.name;
         if (!StardustElement.elementCounter.has(str)) {
             StardustElement.elementCounter.set(str, 0);

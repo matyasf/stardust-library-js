@@ -13,15 +13,15 @@ export default abstract class Action extends SortableElement {
      * @param emitter The associated emitter.
      * @param time The timespan of each emitter's step.
      */
-    public abstract preUpdate(emitter: Emitter, time: number): void;
+    abstract preUpdate(emitter: Emitter, time: number): void;
 
-    public abstract update(emitter: Emitter, particle: Particle, timeDelta: number, currentTime: number): void;
+    abstract update(emitter: Emitter, particle: Particle, timeDelta: number, currentTime: number): void;
 
-    public postUpdate(emitter: Emitter, time: number): void {
+    postUpdate(emitter: Emitter, time: number): void {
     }
 
     @jsonIgnore()
-    public get needsSortedParticles(): boolean {
+    get needsSortedParticles(): boolean {
         return false;
     }
 }

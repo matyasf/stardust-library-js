@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "ESNext",
+    "module": "CommonJS",
     "sourceMap": false,
     "strict": true,
     "esModuleInterop": true,
@@ -18,9 +18,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react",
-    "noEmit": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "outDir": "out",
+    "noEmit": false
   },
   "include": [
     "src"

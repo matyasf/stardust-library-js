@@ -4,14 +4,14 @@ import {Signal} from "typed-signals";
 export default abstract class SortableElement extends StardustElement {
 
     protected _priority: number;
-    public priorityChange = new Signal<() => void>();
-    public added = new Signal<() => void>();
-    public removed = new Signal<() => void>();
+    priorityChange = new Signal<() => void>();
+    added = new Signal<() => void>();
+    removed = new Signal<() => void>();
 
     /**
      * Denotes if its is active, true by default.
      */
-    public active: boolean;
+    active: boolean;
 
     protected constructor() {
         super();
@@ -19,11 +19,11 @@ export default abstract class SortableElement extends StardustElement {
         this.active = true;
     }
 
-    public get priority(): number {
+    get priority(): number {
         return this._priority;
     }
 
-    public set priority(value: number) {
+    set priority(value: number) {
         this._priority = value;
         this.priorityChange.emit();
     }

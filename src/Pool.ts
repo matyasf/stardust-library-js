@@ -11,21 +11,21 @@ export default class Pool<T> implements IDisposable {
         this._itemStore = [];
     }
 
-    public acquire(): T {
+    acquire(): T { // todo rename to getFromPool?
         if (this._itemStore.length > 0) {
             return this._itemStore.pop()!;
         }
         return this._factory(this);
     }
 
-    public release(item: T): void {
+    release(item: T): void {
         this._itemStore.push(item);
     }
 
     /**
      * Dispose the whole pool
      */
-    public dispose(): void {
+    dispose(): void {
         if (this._isDisposed || this._itemStore.length === 0) {
             return;
         }
@@ -38,11 +38,11 @@ export default class Pool<T> implements IDisposable {
         }
     }
 
-    public isIDisposable(obj: any): obj is IDisposable {
+    isIDisposable(obj: any): obj is IDisposable {
         return (obj as IDisposable).dispose !== undefined;
     }
 
-    public get isDisposed() {
+    get isDisposed() {
         return this._isDisposed;
     }
 
