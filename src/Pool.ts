@@ -3,8 +3,8 @@ import IDisposable from "./IDisposable";
 export default class Pool<T> implements IDisposable {
 
     private _isDisposed: boolean = false;
-    private _factory: (pool: Pool<T>) => T;
-    private _itemStore: T[];
+    private readonly _factory: (pool: Pool<T>) => T;
+    private readonly _itemStore: T[];
 
     constructor(factory: (pool: Pool<T>) => T) {
         this._factory = factory;
@@ -26,11 +26,11 @@ export default class Pool<T> implements IDisposable {
      * Dispose the whole pool
      */
     public dispose(): void {
-        if (this._isDisposed) {
+        if (this._isDisposed || this._itemStore.length === 0) {
             return;
         }
         this._isDisposed = true;
-        if (this.isIDisposable(T)) {
+        if (this.isIDisposable(this._itemStore[0])) {
             while (this._itemStore.length > 0) {
                 let disposable = this._itemStore.pop()!;
                 (disposable as unknown as IDisposable).dispose();
@@ -39,10 +39,10 @@ export default class Pool<T> implements IDisposable {
     }
 
     public isIDisposable(obj: any): obj is IDisposable {
-        return typeof obj.dispose === 'function';
+        return (obj as IDisposable).dispose !== undefined;
     }
 
-    public get IsDisposed() {
+    public get isDisposed() {
         return this._isDisposed;
     }
 

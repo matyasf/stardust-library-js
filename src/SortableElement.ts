@@ -1,5 +1,5 @@
 import StardustElement from "./StardustElement";
-import {Signal} from "./Signal";
+import {Signal} from "typed-signals";
 
 export default abstract class SortableElement extends StardustElement {
 
@@ -25,6 +25,6 @@ export default abstract class SortableElement extends StardustElement {
 
     public set priority(value: number) {
         this._priority = value;
-        this.priorityChange.dispatch();
+        this.priorityChange.emit();
     }
 }
