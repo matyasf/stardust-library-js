@@ -104,9 +104,8 @@ export default class Particle {
         this.target = null;
     }
 
-    // TODO this part of an interface in C#
-    compareTo(other: Particle) {
-        if (this.x < other.x)
+    static compareFunction(first: Particle, other: Particle) {
+        if (first.x < other.x)
         {
             return -1;
         }

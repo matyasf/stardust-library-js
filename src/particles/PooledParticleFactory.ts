@@ -1,6 +1,6 @@
 import Pool from "../Pool";
 import Particle from "./Particle";
-import SortableCollection from "../SortableCollection";
+import SortableCollection from "../collections/SortableCollection";
 import Initializer from "../initializers/Initializer";
 
 export default class PooledParticleFactory {

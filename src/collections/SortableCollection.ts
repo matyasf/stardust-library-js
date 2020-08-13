@@ -1,4 +1,4 @@
-import SortableElement from "./SortableElement";
+import SortableElement from "../SortableElement";
 
 export default class SortableCollection<T extends SortableElement> {
 
