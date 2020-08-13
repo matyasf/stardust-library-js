@@ -1,29 +1,32 @@
 import StardustElement from "../StardustElement";
 import {Signal} from "typed-signals";
 import Particle from "../particles/Particle";
-import {jsonIgnore} from "json-ignore";
 import ParticleHandler from "../handlers/ParticleHandler";
 import Clock from "../clocks/Clock";
 import PooledParticleFactory from "../particles/PooledParticleFactory";
 import SortableCollection from "../collections/SortableCollection";
 import Action from "../actions/Action";
 import Initializer from "../initializers/Initializer";
+import {jsonMember, jsonObject} from "typedjson";
 
 /**
  * This class takes charge of the actual particle simulation of the Stardust particle system.
  */
+@jsonObject
 export default class Emitter extends StardustElement {
 
     emitterStepEnd: Signal<(e: Emitter)=>{}> = new Signal<(e: Emitter)=>{}>();
 
-    @jsonIgnore()
     get particles(): Particle[] {
         return this._particles;
     }
+
     particleHandler?: ParticleHandler;
+    @jsonMember
     active: boolean;
-    @jsonIgnore()
+    @jsonMember
     currentTime: number = 0;
+    @jsonMember
     clock?: Clock;
 
     /**
@@ -197,7 +200,6 @@ export default class Emitter extends StardustElement {
         this._factory.clearInitializer();
     }
 
-    @jsonIgnore()
     get numParticles(): number {
         return this._particles.length;
     }

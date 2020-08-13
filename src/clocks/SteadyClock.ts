@@ -2,9 +2,12 @@ import Clock from "./Clock";
 import RandomBase from "../mathStuff/RandomBase";
 import UniformRandom from "../mathStuff/UniformRandom";
 import StardustMath from "../mathStuff/StardustMath";
+import {jsonMember, jsonObject} from "typedjson";
 
+@jsonObject
 export default class SteadyClock extends Clock {
 
+    @jsonMember
     ticksPerCall: number;
     private _initialDelay!: RandomBase;
     private currentInitialDelay!: number;
@@ -17,6 +20,7 @@ export default class SteadyClock extends Clock {
         this.currentTime = 0;
     }
 
+    @jsonMember
     get initialDelay(): RandomBase {
         return this._initialDelay;
     }

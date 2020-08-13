@@ -1,7 +1,6 @@
 import Initializer from "./Initializer";
 import IZoneContainer from "../zones/IZoneContainer";
 import Zone from "../zones/Zone";
-import {jsonIgnore} from "json-ignore";
 import Vec2D from "../geom/Vec2D";
 import ZoneCollection from "../zones/ZoneCollection";
 import Particle from "../particles/Particle";
@@ -19,7 +18,6 @@ export default class PositionAnimated extends Initializer implements IZoneContai
 
     inheritVelocity: boolean = false;
 
-    @jsonIgnore() // TODO parse this
     positions: Vec2D[]|null = null;
 
     private _prevPos: number = 0;
@@ -41,8 +39,34 @@ export default class PositionAnimated extends Initializer implements IZoneContai
     initialize(particle: Particle) {
         const vec2D = this.zoneCollection.getRandomPointInZones();
         if (vec2D != null) {
-            // TODO
+            particle.x = vec2D.x;
+            particle.y = vec2D.y;
+
+            if (this.positions != null)
+            {
+                particle.x = vec2D.x + this.positions[this._currentPos].x;
+                particle.y = vec2D.y + this.positions[this._currentPos].y;
+
+                if (this.inheritVelocity)
+                {
+                    particle.vx += this.positions[this._currentPos].x - this.positions[this._prevPos].x;
+                    particle.vy += this.positions[this._currentPos].y - this.positions[this._prevPos].y;
+                }
+            }
+            else {
+                particle.x = vec2D.x;
+                particle.y = vec2D.y;
+            }
+            Vec2D.recycleToPool(vec2D);
         }
+    }
+
+    get currentPosition(): Vec2D|null
+    {
+        if (this.positions != null) {
+            return this.positions[this._currentPos];
+        }
+        return null;
     }
 
 }

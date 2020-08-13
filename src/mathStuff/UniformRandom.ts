@@ -1,9 +1,12 @@
 import RandomBase from "./RandomBase";
+import {jsonMember, jsonObject} from "typedjson";
 
+@jsonObject
 export default class UniformRandom extends RandomBase{
 
+    @jsonMember
     center: number;
-
+    @jsonMember
     radius: number;
 
     constructor(center: number = 0.5, radius: number = 0) {

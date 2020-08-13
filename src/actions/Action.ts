@@ -1,6 +1,5 @@
 import SortableElement from "../SortableElement";
 import Emitter from "../emitters/Emitter";
-import {jsonIgnore} from "json-ignore";
 import Particle from "../particles/Particle";
 
 export default abstract class Action extends SortableElement {
@@ -20,7 +19,6 @@ export default abstract class Action extends SortableElement {
     postUpdate(emitter: Emitter, time: number): void {
     }
 
-    @jsonIgnore()
     get needsSortedParticles(): boolean {
         return false;
     }
