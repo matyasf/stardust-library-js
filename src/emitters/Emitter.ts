@@ -106,7 +106,46 @@ export default class Emitter extends StardustElement {
                 break;
             }
         }
-        // TODO other parts of this method
+        //invoke action preupdates
+        for (let action of this._activeActions)
+        {
+            action.preUpdate(this, this._timeSinceLastStep);
+        }
+        //update the remaining particles
+        const deadParticles: Particle[] = []; // do not instantiate here
+        for (let particle of this._particles)
+        {
+            for (let activeAction of this._activeActions)
+            {
+                activeAction.update(this, particle, this._timeSinceLastStep, this.currentTime);
+            }
+
+            if (particle.isDead)
+            {
+                deadParticles.push(particle);
+            }
+        }
+        for (let deadParticle of deadParticles)
+        {
+            this.particleHandler!.particleRemoved(deadParticle);
+
+            deadParticle.destroy();
+            this._factory.recycle(deadParticle);
+
+            this._particles.splice(this._particles.indexOf(deadParticle));
+        }
+
+        // postUpdate
+        for (let activeAction of this._activeActions)
+        {
+            activeAction.postUpdate(this, this._timeSinceLastStep);
+        }
+
+        this.emitterStepEnd.emit(this);
+
+        this.particleHandler!.stepEnd(this, this._particles, this._timeSinceLastStep);
+
+        this._timeSinceLastStep = 0;
     }
 
     get actions(): Action[] {
