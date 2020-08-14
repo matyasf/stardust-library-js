@@ -1,7 +1,7 @@
-import RandomBase from "./RandomBase";
 import {Expose} from "class-transformer";
+import {RandomBase} from "./RandomBase";
 
-export default class UniformRandom extends RandomBase{
+export class UniformRandom extends RandomBase{
 
     @Expose()
     center: number;

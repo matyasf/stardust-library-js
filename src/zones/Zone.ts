@@ -1,8 +1,7 @@
-import StardustElement from "../StardustElement";
-import Vec2D from "../geom/Vec2D";
-import StardustMath from "../mathStuff/StardustMath";
+import {StardustElement} from "../StardustElement";
+import {StardustMath, Vec2D} from "..";
 
-export default abstract class Zone extends StardustElement {
+export abstract class Zone extends StardustElement {
     protected _rotation!: number;
     protected angleCos!: number;
     protected angleSin!: number;

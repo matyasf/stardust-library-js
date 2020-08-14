@@ -1,18 +1,18 @@
-import StardustElement from "../StardustElement";
 import {Signal} from "typed-signals";
-import Particle from "../particles/Particle";
-import ParticleHandler from "../handlers/ParticleHandler";
-import Clock from "../clocks/Clock";
-import PooledParticleFactory from "../particles/PooledParticleFactory";
-import SortableCollection from "../collections/SortableCollection";
-import Action from "../actions/Action";
-import Initializer from "../initializers/Initializer";
 import {Expose, Type} from "class-transformer";
+import {Particle} from "../particles/Particle";
+import {Action} from "../actions/Action";
+import {StardustElement} from "../StardustElement";
+import {Initializer} from "../initializers/Initializer";
+import {PooledParticleFactory} from "../particles/PooledParticleFactory";
+import {ParticleHandler} from "../handlers/ParticleHandler";
+import {Clock} from "../clocks/Clock";
+import {SortableCollection} from "../collections/SortableCollection";
 
 /**
  * This class takes charge of the actual particle simulation of the Stardust particle system.
  */
-export default class Emitter extends StardustElement {
+export class Emitter extends StardustElement {
 
     emitterStepEnd: Signal<(e: Emitter)=>{}> = new Signal<(e: Emitter)=>{}>();
 

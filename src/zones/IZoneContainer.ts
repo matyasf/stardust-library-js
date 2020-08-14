@@ -1,6 +1,6 @@
-import Zone from "./Zone";
+import {Zone} from "./Zone";
 
-export default interface IZoneContainer {
+export interface IZoneContainer {
 
     zones: Zone[]; // implement as getter/setter!
 }

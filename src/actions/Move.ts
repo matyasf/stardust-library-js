@@ -1,9 +1,9 @@
-import Action from "./Action";
-import Emitter from "../emitters/Emitter";
-import Particle from "../particles/Particle";
+import {Emitter} from "..";
+import {Particle} from "../particles/Particle";
+import {Action} from "./Action";
 
 // TODO: merge this into the emitter for better UX?
-export default class Move extends Action {
+export class Move extends Action {
 
     public multiplier: number;
     private _factor: number = 0;

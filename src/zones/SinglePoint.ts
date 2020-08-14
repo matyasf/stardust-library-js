@@ -1,7 +1,7 @@
-import Contour from "./Contour";
-import Vec2D from "../geom/Vec2D";
+import {Contour} from "./Contour";
+import {Vec2D} from "..";
 
-export default class SinglePoint extends Contour {
+export class SinglePoint extends Contour {
 
     constructor(x: number, y: number) {
         super();

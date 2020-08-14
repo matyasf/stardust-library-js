@@ -3,8 +3,7 @@
  */
 import {Expose} from "class-transformer";
 
-
-export default abstract class StardustElement
+export abstract class StardustElement
 {
     private static elementCounter = new Map<string, number>();
 

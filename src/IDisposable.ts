@@ -1,3 +1,3 @@
-export default interface IDisposable {
+export interface IDisposable {
     dispose: () => void;
 }

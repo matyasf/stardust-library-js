@@ -1,8 +1,8 @@
-import StardustElement from "../StardustElement";
-import Emitter from "../emitters/Emitter";
-import Particle from "../particles/Particle";
+import {Emitter} from "..";
+import {Particle} from "../particles/Particle";
+import {StardustElement} from "../StardustElement";
 
-export default abstract class ParticleHandler extends StardustElement {
+export abstract class ParticleHandler extends StardustElement {
 
     abstract reset(): void;
 

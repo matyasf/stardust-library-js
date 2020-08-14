@@ -1,6 +1,6 @@
-import IDisposable from "./IDisposable";
+import {IDisposable} from "./IDisposable";
 
-export default class Pool<T> implements IDisposable {
+export class Pool<T> implements IDisposable {
 
     private _isDisposed: boolean = false;
     private readonly _factory: (pool: Pool<T>) => T;

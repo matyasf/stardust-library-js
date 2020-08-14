@@ -1,5 +1,5 @@
 
-export default class StardustMath {
+export class StardustMath {
 
     static twoPi = 2 * Math.PI;
     static degreeToRadian = Math.PI / 180;

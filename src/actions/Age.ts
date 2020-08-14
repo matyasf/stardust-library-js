@@ -1,9 +1,9 @@
-import Action from "./Action";
-import Particle from "../particles/Particle";
-import Emitter from "../emitters/Emitter";
+import {Emitter} from "..";
+import {Action} from "./Action";
+import {Particle} from "..";
 
 // TODO: merge this into the emitter for better UX
-export default class Age extends Action {
+export class Age extends Action {
 
     multiplier: number;
 

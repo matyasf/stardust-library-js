@@ -1,7 +1,7 @@
-import Zone from "./Zone";
-import Vec2D from "../geom/Vec2D";
+import {Zone} from "./Zone";
+import {Vec2D} from "..";
 
-export default class ZoneCollection {
+export class ZoneCollection {
 
     zones: Zone[] = [];
 

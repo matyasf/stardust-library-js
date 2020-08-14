@@ -1,6 +1,6 @@
-import StardustElement from "../StardustElement";
+import {StardustElement} from "../StardustElement";
 
-export default abstract class RandomBase extends StardustElement {
+export abstract class RandomBase extends StardustElement {
 
     abstract random(): number;
 

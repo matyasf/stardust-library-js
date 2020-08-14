@@ -1,8 +1,8 @@
-import Emitter from "../emitters/Emitter";
 import {deserialize, serialize} from "class-transformer";
+import {Emitter} from "..";
 
 // This code uses https://github.com/typestack/class-transformer
-export default class StardustSerializer {
+export class StardustSerializer {
 
     serializeEmitter(emitter: Emitter): string {
         //const serializer = new TypedJSON(Emitter);

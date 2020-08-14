@@ -1,10 +1,10 @@
-import Clock from "./Clock";
-import RandomBase from "../mathStuff/RandomBase";
-import UniformRandom from "../mathStuff/UniformRandom";
-import StardustMath from "../mathStuff/StardustMath";
 import {Expose} from "class-transformer";
+import {Clock} from "./Clock";
+import {UniformRandom} from "..";
+import {StardustMath} from "..";
+import {RandomBase} from "..";
 
-export default class SteadyClock extends Clock {
+export class SteadyClock extends Clock {
 
     @Expose()
     ticksPerCall: number;

@@ -1,11 +1,8 @@
-import Initializer from "./Initializer";
-import IZoneContainer from "../zones/IZoneContainer";
-import Zone from "../zones/Zone";
-import Vec2D from "../geom/Vec2D";
-import ZoneCollection from "../zones/ZoneCollection";
-import Particle from "../particles/Particle";
+import {IZoneContainer, Particle, Zone, ZoneCollection} from "..";
+import {Initializer} from "./Initializer";
+import {Vec2D} from "..";
 
-export default class PositionAnimated extends Initializer implements IZoneContainer{
+export class PositionAnimated extends Initializer implements IZoneContainer{
 
     protected zoneCollection: ZoneCollection;
 

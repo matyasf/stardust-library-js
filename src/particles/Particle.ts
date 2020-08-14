@@ -1,7 +1,7 @@
 /**
  * This class represents a particle and its properties.
  */
-export default class Particle {
+export class Particle {
 
     /**
      * The initial life upon birth.

@@ -1,8 +1,7 @@
-import SortableElement from "../SortableElement";
-import Emitter from "../emitters/Emitter";
-import Particle from "../particles/Particle";
+import {Emitter, Particle} from "..";
+import {SortableElement} from "../SortableElement";
 
-export default abstract class Action extends SortableElement {
+export abstract class Action extends SortableElement {
 
     /**
      * This method is called once upon each `Emitter.step()` method call,

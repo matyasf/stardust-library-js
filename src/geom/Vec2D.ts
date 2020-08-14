@@ -1,8 +1,8 @@
-import IDisposable from "../IDisposable";
-import Pool from "../Pool";
-import StardustMath from "../mathStuff/StardustMath";
+import {StardustMath} from "../mathStuff/StardustMath";
+import {Pool} from "../Pool";
+import {IDisposable} from "../IDisposable";
 
-export default class Vec2D implements IDisposable {
+export class Vec2D implements IDisposable {
 
     private static readonly pool = new Pool<Vec2D>(pool => new Vec2D())
 

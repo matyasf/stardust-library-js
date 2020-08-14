@@ -1,9 +1,8 @@
-import Zone from "./Zone";
-
+import {Zone} from "./Zone";
 /**
  * Zone with no thickness
  */
-export default abstract class Contour extends Zone {
+export abstract class Contour extends Zone {
 
     protected virtualThicknessVal: number;
 

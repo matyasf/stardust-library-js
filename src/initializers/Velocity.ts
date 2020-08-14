@@ -1,9 +1,7 @@
-import Initializer from "./Initializer";
-import Particle from "../particles/Particle";
-import ZoneCollection from "../zones/ZoneCollection";
-import Zone from "../zones/Zone";
+import {Initializer} from "./Initializer";
+import {Particle, Zone, ZoneCollection} from "..";
 
-export default class Velocity extends Initializer {
+export class Velocity extends Initializer {
 
     protected readonly zoneCollection: ZoneCollection;
 

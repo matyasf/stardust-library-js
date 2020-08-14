@@ -1,12 +1,10 @@
-import Contour from "./Contour";
-import Vec2D from "../geom/Vec2D";
-import RandomBase from "../mathStuff/RandomBase";
-import StardustMath from "../mathStuff/StardustMath";
-
 /**
  * Line segment zone.
  */
-export default class Line extends Contour {
+import {Contour} from "./Contour";
+import {RandomBase, StardustMath, Vec2D} from "..";
+
+export class Line extends Contour {
 
     random?: RandomBase;
 

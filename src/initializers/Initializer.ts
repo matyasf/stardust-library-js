@@ -1,7 +1,7 @@
-import SortableElement from "../SortableElement";
-import Particle from "../particles/Particle";
+import {Particle} from "../particles/Particle";
+import {SortableElement} from "../SortableElement";
 
-export default class Initializer extends SortableElement{
+export class Initializer extends SortableElement{
 
     doInitialize(particles: Particle[], currentTime: number) {
         if (this.active) {

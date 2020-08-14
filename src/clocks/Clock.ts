@@ -1,6 +1,6 @@
-import StardustElement from "../StardustElement";
+import {StardustElement} from "../StardustElement";
 
-export default abstract class Clock extends StardustElement {
+export abstract class Clock extends StardustElement {
 
     abstract getTicks(time: number): number;
 

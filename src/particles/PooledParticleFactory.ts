@@ -1,9 +1,9 @@
-import Pool from "../Pool";
-import Particle from "./Particle";
-import SortableCollection from "../collections/SortableCollection";
-import Initializer from "../initializers/Initializer";
+import {Pool} from "../Pool";
+import {Particle} from "./Particle";
+import {SortableCollection} from "../collections/SortableCollection";
+import {Initializer} from "../initializers/Initializer";
 
-export default class PooledParticleFactory {
+export class PooledParticleFactory {
 
     static readonly pool: Pool<Particle> = new Pool<Particle>((p => new Particle()));
 

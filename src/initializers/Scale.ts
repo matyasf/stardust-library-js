@@ -1,8 +1,8 @@
-import Initializer from "./Initializer";
-import RandomBase from "../mathStuff/RandomBase";
-import Particle from "../particles/Particle";
+import {Initializer} from "./Initializer";
+import {RandomBase} from "../mathStuff/RandomBase";
+import {Particle} from "../particles/Particle";
 
-export default class Scale extends Initializer {
+export class Scale extends Initializer {
 
     random?: RandomBase;
 
