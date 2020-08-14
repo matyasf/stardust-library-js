@@ -2,9 +2,15 @@
   "name": "stardust-library-js",
   "version": "1.0.0",
   "license": "Apache 2.0",
+  "type": "commonjs",
   "dependencies": {
     "typed-signals": "2.0.0",
     "reflect-metadata": "0.1.13",
-    "typedjson": "1.6.0-rc2"
+    "class-transformer": "0.3.1"
+  },
+  "main": "out/index.js",
+  "types": "out/index.d.ts",
+  "scripts": {
+    "build": "tsc"
   }
 }

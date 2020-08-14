@@ -7,12 +7,11 @@ import PooledParticleFactory from "../particles/PooledParticleFactory";
 import SortableCollection from "../collections/SortableCollection";
 import Action from "../actions/Action";
 import Initializer from "../initializers/Initializer";
-import {jsonMember, jsonObject} from "typedjson";
+import {Expose, Type} from "class-transformer";
 
 /**
  * This class takes charge of the actual particle simulation of the Stardust particle system.
  */
-@jsonObject
 export default class Emitter extends StardustElement {
 
     emitterStepEnd: Signal<(e: Emitter)=>{}> = new Signal<(e: Emitter)=>{}>();
@@ -22,11 +21,12 @@ export default class Emitter extends StardustElement {
     }
 
     particleHandler?: ParticleHandler;
-    @jsonMember
+    @Expose()
     active: boolean;
-    @jsonMember
+    @Expose()
     currentTime: number = 0;
-    @jsonMember
+    @Expose()
+    @Type(() => Clock)
     clock?: Clock;
 
     /**
@@ -52,6 +52,7 @@ export default class Emitter extends StardustElement {
         this.fps = 60;
     }
 
+    @Expose()
     get fps(): number {
         return this._fps;
     }
@@ -151,6 +152,8 @@ export default class Emitter extends StardustElement {
         this._timeSinceLastStep = 0;
     }
 
+    @Expose()
+    @Type(() => Action)
     get actions(): Action[] {
         return this._actionCollection.elems;
     }

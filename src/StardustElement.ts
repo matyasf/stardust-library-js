@@ -1,12 +1,14 @@
 /**
  * All Stardust elements are subclasses of this class.
  */
-import {jsonMember, jsonObject} from "typedjson";
+import {Expose} from "class-transformer";
+
 
 export default abstract class StardustElement
 {
     private static elementCounter = new Map<string, number>();
-    @jsonMember
+
+    @Expose()
     name: string;
 
     protected constructor() {

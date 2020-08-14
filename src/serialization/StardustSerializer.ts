@@ -1,19 +1,18 @@
 import Emitter from "../emitters/Emitter";
-import {TypedJSON} from "typedjson";
+import {deserialize, serialize} from "class-transformer";
 
-// second choice: https://github.com/typestack/class-transformer
-// this code uses now https://github.com/JohnWeisz/TypedJSON
+// This code uses https://github.com/typestack/class-transformer
 export default class StardustSerializer {
 
-    serialize(emitter: Emitter): string {
-        const serializer = new TypedJSON(Emitter);
-        const res = serializer.stringify(emitter);
+    serializeEmitter(emitter: Emitter): string {
+        //const serializer = new TypedJSON(Emitter);
+        const res = serialize(emitter, { excludeExtraneousValues: true });
         return res;
     }
 
-    deserialize(jsonString: string): Emitter {
-        const serializer = new TypedJSON(Emitter);
-        const em = serializer.parse(jsonString);
+    deserializeEmitter(jsonString: string): Emitter {
+        //const serializer = new TypedJSON(Emitter);
+        const em = deserialize(Emitter, jsonString);
         return em!;
     }
 }
