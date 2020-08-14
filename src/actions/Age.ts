@@ -1,13 +1,12 @@
-import {Emitter} from "..";
+import {Emitter, Particle} from "..";
 import {Action} from "./Action";
-import {Particle} from "..";
 
 // TODO: merge this into the emitter for better UX
 export class Age extends Action {
 
     multiplier: number;
 
-    constructor(multiplier:number = 1) {
+    constructor(multiplier: number = 1) {
         super();
         this.multiplier = multiplier;
     }

@@ -9,6 +9,7 @@ export class SinglePoint extends Contour {
         this._y = y;
         this.updateArea();
     }
+
     calculateMotionData2D(): Vec2D {
         return Vec2D.getFromPool();
     }

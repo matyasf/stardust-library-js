@@ -22,15 +22,17 @@ export class Line extends Contour {
     get x2(): number {
         return this._x2;
     }
+
     set x2(value: number) {
         this._x2 = value;
         this.updateArea();
     }
 
-    private _y2:number;
+    private _y2: number;
     get y2(): number {
         return this._y2;
     }
+
     set y2(value: number) {
         this._y2 = value;
         this.updateArea();

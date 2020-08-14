@@ -42,8 +42,7 @@ export class SortableCollection<T extends SortableElement> {
     private priorityComparison(el1: T, el2: T): number {
         if (el1.priority > el2.priority) {
             return -1;
-        }
-        else if (el1.priority < el2.priority) {
+        } else if (el1.priority < el2.priority) {
             return 1;
         }
         return 0;

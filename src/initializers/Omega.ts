@@ -1,6 +1,5 @@
-import {Particle} from "../particles/Particle";
+import {Particle, RandomBase} from "..";
 import {Initializer} from "./Initializer";
-import {RandomBase} from "../mathStuff/RandomBase";
 
 export class Omega extends Initializer {
 

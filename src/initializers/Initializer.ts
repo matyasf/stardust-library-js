@@ -1,7 +1,7 @@
-import {Particle} from "../particles/Particle";
+import {Particle} from "..";
 import {SortableElement} from "../SortableElement";
 
-export class Initializer extends SortableElement{
+export class Initializer extends SortableElement {
 
     doInitialize(particles: Particle[], currentTime: number) {
         if (this.active) {
@@ -11,5 +11,6 @@ export class Initializer extends SortableElement{
         }
     }
 
-    initialize(particle: Particle) {}
+    initialize(particle: Particle) {
+    }
 }

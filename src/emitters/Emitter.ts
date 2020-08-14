@@ -1,20 +1,14 @@
 import {Signal} from "typed-signals";
 import {Expose, Type} from "class-transformer";
-import {Particle} from "../particles/Particle";
-import {Action} from "../actions/Action";
+import {Action, Clock, Initializer, Particle, ParticleHandler, PooledParticleFactory, SortableCollection} from "..";
 import {StardustElement} from "../StardustElement";
-import {Initializer} from "../initializers/Initializer";
-import {PooledParticleFactory} from "../particles/PooledParticleFactory";
-import {ParticleHandler} from "../handlers/ParticleHandler";
-import {Clock} from "../clocks/Clock";
-import {SortableCollection} from "../collections/SortableCollection";
 
 /**
  * This class takes charge of the actual particle simulation of the Stardust particle system.
  */
 export class Emitter extends StardustElement {
 
-    emitterStepEnd: Signal<(e: Emitter)=>{}> = new Signal<(e: Emitter)=>{}>();
+    emitterStepEnd: Signal<(e: Emitter) => {}> = new Signal<(e: Emitter) => {}>();
 
     get particles(): Particle[] {
         return this._particles;
@@ -56,6 +50,7 @@ export class Emitter extends StardustElement {
     get fps(): number {
         return this._fps;
     }
+
     set fps(value: number) {
         if (value > 60) {
             value = 60;
@@ -94,43 +89,35 @@ export class Emitter extends StardustElement {
 
         //filter out active actions
         this._activeActions.length = 0;
-        for (let action of this.actions)
-        {
+        for (let action of this.actions) {
             if (action.active) {
                 this._activeActions.push(action);
             }
         }
 
         // sorting
-        for (let activeAction of this._activeActions)
-        {
-            if (activeAction.needsSortedParticles)
-            {
+        for (let activeAction of this._activeActions) {
+            if (activeAction.needsSortedParticles) {
                 this._particles.sort(Particle.compareFunction);
                 break;
             }
         }
         //invoke action preupdates
-        for (let action of this._activeActions)
-        {
+        for (let action of this._activeActions) {
             action.preUpdate(this, this._timeSinceLastStep);
         }
         //update the remaining particles
         const deadParticles: Particle[] = []; // do not instantiate here
-        for (let particle of this._particles)
-        {
-            for (let activeAction of this._activeActions)
-            {
+        for (let particle of this._particles) {
+            for (let activeAction of this._activeActions) {
                 activeAction.update(this, particle, this._timeSinceLastStep, this.currentTime);
             }
 
-            if (particle.isDead)
-            {
+            if (particle.isDead) {
                 deadParticles.push(particle);
             }
         }
-        for (let deadParticle of deadParticles)
-        {
+        for (let deadParticle of deadParticles) {
             this.particleHandler!.particleRemoved(deadParticle);
 
             deadParticle.destroy();
@@ -140,8 +127,7 @@ export class Emitter extends StardustElement {
         }
 
         // postUpdate
-        for (let activeAction of this._activeActions)
-        {
+        for (let activeAction of this._activeActions) {
             activeAction.postUpdate(this, this._timeSinceLastStep);
         }
 
@@ -157,6 +143,7 @@ export class Emitter extends StardustElement {
     get actions(): Action[] {
         return this._actionCollection.elems;
     }
+
     set actions(value: Action[]) {
         for (const action of value) {
             this.addAction(action);
@@ -176,8 +163,7 @@ export class Emitter extends StardustElement {
     clearActions(): void {
         let actions = this._actionCollection.elems;
         let len = actions.length;
-        for (let i = 0; i < len; ++i)
-        {
+        for (let i = 0; i < len; ++i) {
             actions[i].removed.emit();
         }
         this._actionCollection.clear();
@@ -196,8 +182,7 @@ export class Emitter extends StardustElement {
     clearInitializer(): void {
         let initializers = this._factory.initializerCollection.elems;
         let len = initializers.length;
-        for (let i = 0; i < len; ++i)
-        {
+        for (let i = 0; i < len; ++i) {
             initializers[i].removed.emit();
         }
         this._factory.clearInitializer();

@@ -1,4 +1,4 @@
-import {StardustMath} from "../mathStuff/StardustMath";
+import {StardustMath} from "..";
 import {Pool} from "../Pool";
 import {IDisposable} from "../IDisposable";
 
@@ -27,6 +27,7 @@ export class Vec2D implements IDisposable {
     get length(): number {
         return Math.sqrt(this.x * this.x + this.y * this.y);
     }
+
     set length(value: number) {
         if (this.x == 0 && this.y == 0) return;
         const factor = value / length;
@@ -76,8 +77,8 @@ export class Vec2D implements IDisposable {
     set angle(value: number) {
         const originalLength = this.length;
         const rad = value * StardustMath.degreeToRadian;
-        this.x = originalLength* Math.cos(rad);
-        this.y = originalLength* Math.sin(rad);
+        this.x = originalLength * Math.cos(rad);
+        this.y = originalLength * Math.sin(rad);
     }
 
     clone(): Vec2D {

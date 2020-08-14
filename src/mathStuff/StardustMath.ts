@@ -1,4 +1,3 @@
-
 export class StardustMath {
 
     static twoPi = 2 * Math.PI;

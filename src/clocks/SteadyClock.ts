@@ -1,8 +1,6 @@
 import {Expose} from "class-transformer";
 import {Clock} from "./Clock";
-import {UniformRandom} from "..";
-import {StardustMath} from "..";
-import {RandomBase} from "..";
+import {RandomBase, StardustMath, UniformRandom} from "..";
 
 export class SteadyClock extends Clock {
 
@@ -23,6 +21,7 @@ export class SteadyClock extends Clock {
     get initialDelay(): RandomBase {
         return this._initialDelay;
     }
+
     set initialDelay(value: RandomBase) {
         this._initialDelay = value;
         this.setCurrentInitialDelay();
@@ -30,8 +29,7 @@ export class SteadyClock extends Clock {
 
     getTicks(time: number): number {
         this.currentTime += time;
-        if (this.currentTime > this.currentInitialDelay)
-        {
+        if (this.currentTime > this.currentInitialDelay) {
             return StardustMath.randomFloor(this.ticksPerCall * time);
         }
         return 0;

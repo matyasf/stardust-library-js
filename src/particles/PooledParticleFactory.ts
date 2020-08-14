@@ -1,7 +1,6 @@
 import {Pool} from "../Pool";
 import {Particle} from "./Particle";
-import {SortableCollection} from "../collections/SortableCollection";
-import {Initializer} from "../initializers/Initializer";
+import {Initializer, SortableCollection} from "..";
 
 export class PooledParticleFactory {
 
@@ -43,7 +42,7 @@ export class PooledParticleFactory {
         this._initializerCollection.clear();
     }
 
-    get initializerCollection() : SortableCollection<Initializer> {
+    get initializerCollection(): SortableCollection<Initializer> {
         return this._initializerCollection;
     }
 

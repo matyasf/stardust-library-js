@@ -47,6 +47,7 @@ export abstract class Zone extends StardustElement {
     get rotation(): number {
         return this._rotation;
     }
+
     set rotation(value: number) {
         const valInRad = value * StardustMath.degreeToRadian;
         this.angleCos = Math.cos(valInRad);

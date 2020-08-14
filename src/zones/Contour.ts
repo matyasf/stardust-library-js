@@ -1,4 +1,5 @@
 import {Zone} from "./Zone";
+
 /**
  * Zone with no thickness
  */
@@ -19,6 +20,7 @@ export abstract class Contour extends Zone {
     get VirtualThickness(): number {
         return this.virtualThicknessVal;
     }
+
     set VirtualThickness(value: number) {
         this.virtualThicknessVal = value;
         this.updateArea();

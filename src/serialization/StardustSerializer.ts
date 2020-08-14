@@ -6,7 +6,7 @@ export class StardustSerializer {
 
     serializeEmitter(emitter: Emitter): string {
         //const serializer = new TypedJSON(Emitter);
-        const res = serialize(emitter, { excludeExtraneousValues: true });
+        const res = serialize(emitter, {excludeExtraneousValues: true});
         return res;
     }
 

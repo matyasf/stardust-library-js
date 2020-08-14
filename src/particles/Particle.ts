@@ -44,7 +44,7 @@ export class Particle {
      * Normally, this property contains information for renderers.
      * For instance this property should refer to the graphics object of this particle.
      */
-    target: object|null = null;
+    target: object | null = null;
 
     /**
      * Current red color component; in the [0,1] range.
@@ -75,7 +75,8 @@ export class Particle {
     isDeflected: boolean = false;
 
     // Use PooledParticleFactory to instantiate Particles
-    constructor() {}
+    constructor() {
+    }
 
     /**
      * Initializes properties to default values.
@@ -105,8 +106,7 @@ export class Particle {
     }
 
     static compareFunction(first: Particle, other: Particle) {
-        if (first.x < other.x)
-        {
+        if (first.x < other.x) {
             return -1;
         }
         return 1;

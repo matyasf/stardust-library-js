@@ -1,6 +1,5 @@
-import {Emitter} from "..";
+import {Emitter, Particle} from "..";
 import {Action} from "./Action";
-import {Particle} from "..";
 
 // TODO: merge this into the emitter for better UX
 export class DeathLife extends Action {

@@ -3,8 +3,7 @@
  */
 import {Expose} from "class-transformer";
 
-export abstract class StardustElement
-{
+export abstract class StardustElement {
     private static elementCounter = new Map<string, number>();
 
     @Expose()
@@ -14,8 +13,7 @@ export abstract class StardustElement
         const str = this.constructor.name;
         if (!StardustElement.elementCounter.has(str)) {
             StardustElement.elementCounter.set(str, 0);
-        }
-        else {
+        } else {
             const curr = StardustElement.elementCounter.get(str);
             StardustElement.elementCounter.set(str, curr! + 1);
         }
