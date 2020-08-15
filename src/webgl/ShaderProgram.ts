@@ -8,7 +8,7 @@ export class ShaderProgram {
     private fragmentShaderId?: WebGLShader;
 
     readonly uniforms = new Map<string, WebGLUniformLocation>();
-    readonly attributes = new Map<string, WebGLUniformLocation>();
+    readonly attributes = new Map<string, number>();
 
     constructor(initVertexShader: string, initFragmentShader: string) {
         this._vertexShader = initVertexShader;
@@ -107,7 +107,7 @@ export class ShaderProgram {
             // if its null its not a shader attribute for example
             // https://jsfiddle.net/greggman/n6mzz6jv/
             if (location && location >= 0) {
-                this.uniforms.set(info.name, location);
+                this.attributes.set(info.name, location);
             }
         }
     }

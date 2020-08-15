@@ -1,4 +1,4 @@
-import {Frame, Particle, StardustMath, WebGLParticleBuffers} from "..";
+import {Frame, Particle, ShaderProgram, Shaders, StardustMath, WebGLParticleBuffers} from "..";
 
 export class WebGLRenderer {
 
@@ -11,7 +11,7 @@ export class WebGLRenderer {
     private static _maxParticles: number = 0;
     static readonly maxPossibleParticles = 50000;
     private _mNumParticles: number = 0;
-    private _vertexes: number[] = [];
+    private _vertexes: Float32Array|undefined;
     private _frames: Frame[] = [];
 
     static readonly sCosLut: number[] = []; // lookup tables TODO figure out if this is worth it
@@ -69,7 +69,7 @@ export class WebGLRenderer {
 
     advanceTime(mParticles: Particle[]) {
         this._mNumParticles = mParticles.length;
-        this._vertexes = [];
+        this._vertexes = new Float32Array(this._mNumParticles * 32); // this is a bottleneck
         for (let i = 0; i < this._mNumParticles; ++i) {
             const vertexId = i << 2;
             const particle = mParticles[i];
@@ -103,13 +103,13 @@ export class WebGLRenderer {
             let position = vertexId << 3;
             if (rotation !== 0)
             {
-                var angle = ((rotation * 325.94932345220164765467394738691) & 2047);
-                var cos = WebGLRenderer.sCosLut[angle];
-                var sin = WebGLRenderer.sSinLut[angle];
-                var cosX = cos * xOffset;
-                var cosY = cos * yOffset;
-                var sinX = sin * xOffset;
-                var sinY = sin * yOffset;
+                const angle = ((rotation * 325.94932345220164765467394738691) & 2047);
+                const cos = WebGLRenderer.sCosLut[angle];
+                const sin = WebGLRenderer.sSinLut[angle];
+                const cosX = cos * xOffset;
+                const cosY = cos * yOffset;
+                const sinX = sin * xOffset;
+                const sinY = sin * yOffset;
 
                 this._vertexes[position] = x - cosX + sinY;  // 0,1: position (in pixels)
                 this._vertexes[++position] = y - sinX - cosY;
@@ -214,6 +214,43 @@ export class WebGLRenderer {
 
         gl.enable(gl.BLEND)
         gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+
+        const program = Shaders.getProgram();
+        program.activate(gl);
+
+        let uAlpha = program.uniforms.get("uAlpha")!;
+        gl.uniform4f(uAlpha, 1, 1, 1, 1);
+
+        let uMvpMatrix = program.uniforms.get("uMvpMatrix")!;
+        // TODO: make a MVP matrix
+       // gl.uniformMatrix4fv(uMvpMatrix, false, MvpMatrix3D.RawData);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, WebGLParticleBuffers.vertexBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, this._vertexes!, gl.DYNAMIC_DRAW);
+
+        const attribPosition = program.attributes.get("aPosition")!;
+        gl.enableVertexAttribArray(attribPosition);
+        gl.vertexAttribPointer(attribPosition, 2, gl.FLOAT, false, 32, 0);
+
+        const attribColor = program.attributes.get("aColor")!;
+        gl.enableVertexAttribArray(attribColor);
+        gl.vertexAttribPointer(attribColor, 4, gl.FLOAT, false, 32, 8);
+
+        const aTexCoords = program.attributes.get("aTexCoords")!;
+        gl.enableVertexAttribArray(aTexCoords);
+        gl.vertexAttribPointer(aTexCoords, 2, gl.FLOAT, false, 32, 24);
+        gl.activeTexture(gl.TEXTURE0);
+        //TODO RenderUtil.SetSamplerStateAt(_mTexture.Base, _mTexture.NumMipMaps > 0, TexSmoothing);
+
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, WebGLParticleBuffers.indexBuffer);
+
+        // TODO limit max number of particles
+        gl.drawElements(gl.TRIANGLES, (this._mNumParticles + mNumBatchedParticles) * 6, gl.UNSIGNED_SHORT, 0);
+
+        gl.disableVertexAttribArray(attribPosition);
+        gl.disableVertexAttribArray(attribColor);
+        gl.disableVertexAttribArray(aTexCoords);
+        gl.bindTexture(gl.TEXTURE_2D, 0); // TODO last param is a WebGLTexture!
     }
 
 
